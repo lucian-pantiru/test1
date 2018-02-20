@@ -1,0 +1,33 @@
+﻿@Html.DevExpress().Scheduler(
+    settings =>
+    {
+        settings.Name = "scheduler";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "SchedulerPartial" };
+
+        settings.Storage.Appointments.Assign(dx17test.Helpers.SchedulerStorageProvider.DefaultAppointmentStorage);
+        settings.Storage.Resources.Assign(dx17test.Helpers.SchedulerStorageProvider.DefaultResourceStorage);
+
+        settings.Storage.EnableReminders = false;
+
+        settings.OptionsCustomization.AllowAppointmentCreate = DevExpress.XtraScheduler.UsedAppointmentType.None;
+        settings.OptionsCustomization.AllowAppointmentEdit = DevExpress.XtraScheduler.UsedAppointmentType.None;
+        settings.OptionsCustomization.AllowAppointmentDelete = DevExpress.XtraScheduler.UsedAppointmentType.None;
+
+        settings.Width = 800;
+        settings.Views.DayView.Styles.ScrollAreaHeight = 600;
+        settings.Views.DayView.DayCount = 2;
+        settings.Start = new DateTime(2015, 4, 15);
+        settings.GroupType = SchedulerGroupType.Resource;
+
+    }).Bind(
+    //Hide appointments containing "Test" in their subject lines.
+    (e) =>
+    {
+        if (((Appointment)e.Object).Subject.Contains("Test")) e.Cancel = true;
+    },
+    //Hide appointments assigned to resources containing "OPEL" in their captions.
+    (e) =>
+    {
+        if (((Resource)e.Object).Caption.Contains("OPEL")) e.Cancel = true;
+    }
+    ).Bind(Model.Appointments, Model.Resources).GetHtml()

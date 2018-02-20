@@ -1,3 +1,4 @@
+using dx17test.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,13 @@ namespace dx17test.Controllers
     {
         public ActionResult Index()
         {
-            
-            
-            return View();
+            return View(SchedulerDataHelper.DataObject);
         }
-        
-    
+
+        public ActionResult SchedulerPartial()
+        {
+            return PartialView("SchedulerPartial", SchedulerDataHelper.DataObject);
+        }
     }
 }
 
