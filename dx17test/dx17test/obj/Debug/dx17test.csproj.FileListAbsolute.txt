@@ -274,3 +274,4 @@ C:\freeaccess\github\testdx17\dx17test\dx17test\bin\ru\DevExpress.XtraTreeList.v
 C:\freeaccess\github\testdx17\dx17test\dx17test\obj\Debug\dx17test.csproj.CoreCompileInputs.cache
 C:\freeaccess\github\testdx17\dx17test\dx17test\obj\Debug\dx17test.dll
 C:\freeaccess\github\testdx17\dx17test\dx17test\obj\Debug\dx17test.pdb
+C:\freeaccess\github\testdx17\dx17test\dx17test\obj\Debug\dx17test.csprojResolveAssemblyReference.cache
