@@ -2,27 +2,33 @@
 using DevExpress.Web.ASPxScheduler;
 using DevExpress.Web.Mvc;
 using DevExpress.XtraScheduler;
+using dx17test.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace dx17test.Helpers
 {
-    public class SchedulerSettingsHelper
+    public static class SchedulerSettingsHelper
     {
-        static SchedulerSettings commonSchedulerSettings;
-        public static SchedulerSettings CommonSchedulerSettings
+        //static SchedulerSettings commonSchedulerSettings;
+        //public static SchedulerSettings CommonSchedulerSettings
+        //{
+        //    get
+        //    {
+        //        if (commonSchedulerSettings == null)
+        //            commonSchedulerSettings = CreateSchedulerSettings();
+        //        return commonSchedulerSettings;
+        //    }
+        //}
+
+        public static SchedulerSettings GetSchedulerSettings()
         {
-            get
-            {
-                if (commonSchedulerSettings == null)
-                    commonSchedulerSettings = CreateSchedulerSettings();
-                return commonSchedulerSettings;
-            }
+            return GetSchedulerSettings(null);
         }
-        static SchedulerSettings CreateSchedulerSettings()
+
+        public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml)
         {
             SchedulerSettings settings = new SchedulerSettings();
             settings.Name = "scheduler";
@@ -40,14 +46,51 @@ namespace dx17test.Helpers
             settings.Views.DayView.DayCount = 2;
             settings.ActiveViewType = SchedulerViewType.Day;
 
+            settings.AppointmentFormShowing = PrepareAppointmentPopup;
+
+            settings.OptionsForms.SetAppointmentFormTemplateContent(c => {
+                var container = (CustomAppointmentTemplateContainer)c;
+                AppointmentDialogViewModel modelAppointment = new AppointmentDialogViewModel()
+                {
+                    ID = container.Appointment.Id == null ? -1 : (int)container.Appointment.Id,
+                    Subject = container.Appointment.Subject,
+                    Location = container.Appointment.Location,
+                    StartTime = container.Appointment.Start,
+                    EndTime = container.Appointment.End,
+                    AllDay = container.Appointment.AllDay,
+                    Description = container.Appointment.Description,
+                    EventType = (int)container.Appointment.Type,
+                    Status = container.Appointment.StatusId,
+                    Label = container.Appointment.LabelId,
+                    //CustomInfo = container.CustomInfo,
+                    //OwnerId = Convert.ToInt32(container.Appointment.ResourceId)
+                };
+
+                customHtml.ViewBag.DeleteButtonEnabled = container.CanDeleteAppointment;
+
+                (container.ResourceDataSource as ListEditItemCollection).RemoveAt(0);
+                customHtml.ViewBag.ResourceDataSource = container.ResourceDataSource;
+                customHtml.ViewBag.StatusDataSource = container.StatusDataSource;
+                customHtml.ViewBag.LabelDataSource = container.LabelDataSource;
+                customHtml.ViewBag.ReminderDataSource = container.ReminderDataSource;
+                System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(customHtml, "CustomAppointmentFormPartial", modelAppointment);
+            });
+
             //customized text inside description field in appointment form
-            settings.OptionsForms.DialogLayoutSettings.AppointmentDialog.ViewModel.PrepareControlFor(m => m.Description, (ASPxMemo me) => {
+            settings.OptionsForms.DialogLayoutSettings.AppointmentDialog.ViewModel.PrepareControlFor(m => m.Description, (ASPxMemo me) =>
+            {
                 me.ForeColor = Color.Blue;
                 me.Font.Bold = true;
                 me.Font.Italic = true;
             });
 
             return settings;
+        }
+
+        private static void PrepareAppointmentPopup(object sender, AppointmentFormEventArgs e)
+        {
+            if (sender != null)
+                e.Container = (new CustomAppointmentTemplateContainer(sender as MVCxScheduler));
         }
     }
 }

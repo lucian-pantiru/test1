@@ -33,21 +33,21 @@ namespace dx17test.Controllers
 
         static void UpdateAppointment()
         {
-            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in insertedAppts)
             {
                 SchedulerDataHelper.InsertAppointment(appt);
             }
 
-            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in updatedAppt)
             {
                 SchedulerDataHelper.UpdateAppointment(appt);
             }
 
-            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in removedAppt)
             {
