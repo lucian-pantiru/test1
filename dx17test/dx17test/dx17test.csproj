@@ -298,8 +298,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AppointmentDataAccessor.cs" />
     <Compile Include="Helpers\SchedulerDataHelper.cs" />
+    <Compile Include="Helpers\SchedulerSettingsHelper.cs" />
     <Compile Include="Helpers\SchedulerStorageProvider.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -33,25 +33,25 @@ namespace dx17test.Controllers
 
         static void UpdateAppointment()
         {
-            DBAppointment[] insertedAppointments = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>("scheduler", SchedulerDataHelper.GetAppointments(),
-                SchedulerDataHelper.GetResources(), SchedulerStorageProvider.DefaultAppointmentStorage, SchedulerStorageProvider.DefaultResourceStorage);
-            foreach (var appt in insertedAppointments)
+            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+                SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
+            foreach (var appt in insertedAppts)
             {
-                AppointmentDataAccessor.InsertAppointment(appt);
+                SchedulerDataHelper.InsertAppointment(appt);
             }
 
-            DBAppointment[] updatedAppointments = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>("scheduler", SchedulerDataHelper.GetAppointments(),
-                SchedulerDataHelper.GetResources(), SchedulerStorageProvider.DefaultAppointmentStorage, SchedulerStorageProvider.DefaultResourceStorage);
-            foreach (var appt in updatedAppointments)
+            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+                SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
+            foreach (var appt in updatedAppt)
             {
-                AppointmentDataAccessor.UpdateAppointment(appt);
+                SchedulerDataHelper.UpdateAppointment(appt);
             }
 
-            DBAppointment[] removedAppointments = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>("scheduler", SchedulerDataHelper.GetAppointments(),
-                SchedulerDataHelper.GetResources(), SchedulerStorageProvider.DefaultAppointmentStorage, SchedulerStorageProvider.DefaultResourceStorage);
-            foreach (var appt in removedAppointments)
+            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.CommonSchedulerSettings,
+                SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
+            foreach (var appt in removedAppt)
             {
-                AppointmentDataAccessor.RemoveAppointment(appt);
+                SchedulerDataHelper.RemoveAppointment(appt);
             }
         }
 

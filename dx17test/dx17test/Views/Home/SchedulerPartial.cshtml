@@ -1,15 +1,1 @@
-﻿@Html.DevExpress().Scheduler(
-settings =>
-{
-    settings.Name = "scheduler";
-    settings.CallbackRouteValues = new { Controller = "Home", Action = "SchedulerPartial" };
-    settings.EditAppointmentRouteValues = new { Controller = "Home", Action = "EditAppointment" };
-    settings.Storage.Appointments.Assign(dx17test.Helpers.SchedulerStorageProvider.DefaultAppointmentStorage);
-    settings.Storage.Resources.Assign(dx17test.Helpers.SchedulerStorageProvider.DefaultResourceStorage);
-
-    settings.Storage.EnableReminders = true;
-
-    settings.ActiveViewType = SchedulerViewType.FullWeek;
-    settings.Start = new DateTime(2015, 4, 18);
-
-}).Bind(Model.Appointments, Model.Resources).GetHtml()
+﻿@Html.DevExpress().Scheduler(SchedulerSettingsHelper.CommonSchedulerSettings).Bind(Model.Appointments, Model.Resources).GetHtml()
