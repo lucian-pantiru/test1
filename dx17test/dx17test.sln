@@ -3,8 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dx17test", "dx17test\dx17test.csproj", "{37F4EB87-2D1C-4846-B957-DF6235644688}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37F4EB87-2D1C-4846-B957-DF6235644688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F4EB87-2D1C-4846-B957-DF6235644688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F4EB87-2D1C-4846-B957-DF6235644688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F4EB87-2D1C-4846-B957-DF6235644688}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD2A48B4-3CFF-4C6C-B717-8F4BBBFBD764}
 	EndGlobalSection
 EndGlobal
