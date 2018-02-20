@@ -11,10 +11,10 @@ namespace dx17test.ViewModels
         public AppointmentDialogViewModel() { }
 
         [Required]
-        public DateTime StartTime { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Required]
-        public DateTime EndTime { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required]
         public string Subject { get; set; }
@@ -24,7 +24,7 @@ namespace dx17test.ViewModels
         public int Label { get; set; }
         public string Location { get; set; }
         public bool AllDay { get; set; }
-        public int EventType { get; set; }
+        public int Type { get; set; }
         public string RecurrenceInfo { get; set; }
         public string ReminderInfo { get; set; }
 
@@ -32,6 +32,6 @@ namespace dx17test.ViewModels
         [Display(Name = "Resource")]
         public int OwnerId { get; set; }
         public string CustomInfo { get; set; }
-        public int ID { get; set; }
+        public int UniqueId { get; set; }
     }
 }

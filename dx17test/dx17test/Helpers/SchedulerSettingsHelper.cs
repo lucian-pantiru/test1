@@ -52,14 +52,14 @@ namespace dx17test.Helpers
                 var container = (CustomAppointmentTemplateContainer)c;
                 AppointmentDialogViewModel modelAppointment = new AppointmentDialogViewModel()
                 {
-                    ID = container.Appointment.Id == null ? -1 : (int)container.Appointment.Id,
+                    UniqueId = container.Appointment.Id == null ? -1 : (int)container.Appointment.Id,
                     Subject = container.Appointment.Subject,
                     Location = container.Appointment.Location,
-                    StartTime = container.Appointment.Start,
-                    EndTime = container.Appointment.End,
+                    StartDate = container.Appointment.Start,
+                    EndDate = container.Appointment.End,
                     AllDay = container.Appointment.AllDay,
                     Description = container.Appointment.Description,
-                    EventType = (int)container.Appointment.Type,
+                    Type = (int)container.Appointment.Type,
                     Status = container.Appointment.StatusId,
                     Label = container.Appointment.LabelId,
                     //CustomInfo = container.CustomInfo,

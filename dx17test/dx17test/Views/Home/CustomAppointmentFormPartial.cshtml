@@ -50,10 +50,10 @@
         </tr>
         <tr>
             <td style="white-space: nowrap; padding-right: 15px;">
-                @Html.DevExpress().LabelFor(m => m.StartTime).GetHtml()
+                @Html.DevExpress().LabelFor(m => m.StartDate).GetHtml()
             </td>
             <td colspan="3">
-                @Html.DevExpress().DateEditFor(m => m.StartTime,
+                @Html.DevExpress().DateEditFor(m => m.StartDate,
                          settings =>
                          {
                              settings.Properties.EditFormat = EditFormat.DateTime;
@@ -65,10 +65,10 @@
         </tr>
         <tr>
             <td style="white-space: nowrap; padding-right: 15px;">
-                @Html.DevExpress().LabelFor(m => m.EndTime).GetHtml()
+                @Html.DevExpress().LabelFor(m => m.EndDate).GetHtml()
             </td>
             <td colspan="3">
-                @Html.DevExpress().DateEditFor(m => m.EndTime,
+                @Html.DevExpress().DateEditFor(m => m.EndDate,
                          settings =>
                          {
                              settings.Properties.EditFormat = EditFormat.DateTime;
@@ -109,7 +109,7 @@
         </tr>
 
 
-        @if (Model.EventType == 0 || Model.EventType == 1)
+        @if (Model.Type == 0 || Model.Type == 1)
         {
             <tr>
                 <td style="padding-right: 15px;">
