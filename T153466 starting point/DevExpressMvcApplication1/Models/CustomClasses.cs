@@ -19,7 +19,8 @@ namespace DevExpressMvcApplication1.Models {
         private string m_ReminderInfo;
         private string m_OwnerId;
         private int m_Id;
-
+        private int m_company_id;
+        private int m_conact_id;
 
         public DateTime StartTime { get { return m_Start; } set { m_Start = value; } }
         public DateTime EndTime { get { return m_End; } set { m_End = value; } }
@@ -34,6 +35,10 @@ namespace DevExpressMvcApplication1.Models {
         public string ReminderInfo { get { return m_ReminderInfo; } set { m_ReminderInfo = value; } }
         public string OwnerId { get { return m_OwnerId; } set { m_OwnerId = value; } }
         public int ID { get { return m_Id; } set { m_Id = value; } }
+
+        // added
+        public int CompanyID { get { return m_company_id; } set { m_company_id = value; } }
+        public int ContactID { get { return m_conact_id; } set { m_conact_id = value; } }
 
         public CustomAppointment() {
         }
@@ -76,6 +81,61 @@ namespace DevExpressMvcApplication1.Models {
 
     }
     #endregion #customresource
+
+    public class Company
+    {
+        private string m_company_name;
+        private int m_company_id;
+
+        public string CompanyName { get { return m_company_name; } set { m_company_name = value; } }
+        public int CompanyID { get { return m_company_id; } set { m_company_id = value; } }
+
+        public Company()
+        {
+        }
+
+        public static List<Company> GenerateCompanyDataSource()
+        {
+            List<Company> returnedResult = new List<Company>();
+            for (int i = 0; i < 10; i++)
+            {
+                returnedResult.Add(new Company() { CompanyID = i, CompanyName = "Company " + i.ToString() });
+            }
+            return returnedResult;
+        }
+    }
+
+    public class CompanyContact
+    {
+        private string m_contact_name;
+        private int m_contact_id;
+        private int m_company_id;
+
+        public string ContactName { get { return m_contact_name; } set { m_contact_name = value; } }
+        public int ContactID { get { return m_contact_id; } set { m_contact_id = value; } }
+        public int CompanyID { get { return m_company_id; } set { m_company_id = value; } }
+
+        public CompanyContact()
+        {
+        }
+
+        public static List<CompanyContact> GenerateContactDataSource()
+        {
+            List<CompanyContact> returnedResult = new List<CompanyContact>();
+            List<Company> companies = Company.GenerateCompanyDataSource();
+
+            int uniqueContactID = 0;
+            for (int i = 0; i < companies.Count; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    returnedResult.Add(new CompanyContact() { CompanyID = i, ContactName = "Contact " + j.ToString() + ", Company " + i.ToString(), ContactID = uniqueContactID });
+                    uniqueContactID++;
+                }
+            }
+            return returnedResult;
+        }
+    }
 
     public class SchedulerDataObject {
         public List<CustomAppointment> Appointments { get; set; }

@@ -77,6 +77,10 @@ public class SchedulerDataHelper {
         appointmentStorage.Mappings.ResourceId = "OwnerId";
         appointmentStorage.Mappings.Status = "Status";
         appointmentStorage.Mappings.Type = "EventType";
+
+        // added
+        appointmentStorage.CustomFieldMappings.Add(new DevExpress.Web.ASPxScheduler.ASPxAppointmentCustomFieldMapping("AppointmentCompany", "CompanyID"));
+        appointmentStorage.CustomFieldMappings.Add(new DevExpress.Web.ASPxScheduler.ASPxAppointmentCustomFieldMapping("AppointmentContact", "ContactID"));
         return appointmentStorage;
     }
 
@@ -113,6 +117,16 @@ public class SchedulerDataHelper {
         settings.GroupType = SchedulerGroupType.Resource;
         settings.Views.DayView.Styles.ScrollAreaHeight = 400;
         settings.Start = DateTime.Now;
+
+        var dialog = settings.OptionsForms.DialogLayoutSettings.AppointmentDialog;
+        dialog.ViewModel = new CustomAppointmentEditDialogViewModel();
+        dialog.GenerateDefaultLayoutElements();
+
+        var companies = dialog.LayoutElements.CreateField((CustomAppointmentEditDialogViewModel m) => m.AppointmentCompany);
+        var contacts = dialog.LayoutElements.CreateField((CustomAppointmentEditDialogViewModel m) => m.AppointmentContact);
+        dialog.InsertBefore(companies, dialog.FindLayoutElement("Description"));
+        dialog.InsertAfter(contacts, companies);
+
         return settings;
     }
 
