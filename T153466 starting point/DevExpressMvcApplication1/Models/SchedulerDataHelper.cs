@@ -78,7 +78,8 @@ public class SchedulerDataHelper {
         appointmentStorage.Mappings.Status = "Status";
         appointmentStorage.Mappings.Type = "EventType";
 
-        // added
+        // added mappings AppointmentCompany and AppointmentContact - these will be property names in the new viewmodel for the dialog
+        // the names CompanyID and ContactID are the properties to which these are bound (similar to the code above, they're just the names in the original POCO class) 
         appointmentStorage.CustomFieldMappings.Add(new DevExpress.Web.ASPxScheduler.ASPxAppointmentCustomFieldMapping("AppointmentCompany", "CompanyID"));
         appointmentStorage.CustomFieldMappings.Add(new DevExpress.Web.ASPxScheduler.ASPxAppointmentCustomFieldMapping("AppointmentContact", "ContactID"));
         return appointmentStorage;
