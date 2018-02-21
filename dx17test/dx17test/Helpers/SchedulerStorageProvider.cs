@@ -25,7 +25,7 @@ namespace dx17test.Helpers
             appointmentStorage.Mappings.AppointmentId = "UniqueID";
             appointmentStorage.Mappings.Start = "StartDate";
             appointmentStorage.Mappings.End = "EndDate";
-            appointmentStorage.Mappings.Subject = "Subject";
+            appointmentStorage.Mappings.Subject = "Subjject";
             appointmentStorage.Mappings.Description = "Description";
             appointmentStorage.Mappings.Location = "Location";
             appointmentStorage.Mappings.AllDay = "AllDay";

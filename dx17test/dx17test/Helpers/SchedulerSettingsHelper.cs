@@ -53,7 +53,7 @@ namespace dx17test.Helpers
                 AppointmentDialogViewModel modelAppointment = new AppointmentDialogViewModel()
                 {
                     UniqueId = container.Appointment.Id == null ? -1 : (int)container.Appointment.Id,
-                    Subject = container.Appointment.Subject,
+                    Subjject = container.Appointment.Subject,
                     Location = container.Appointment.Location,
                     StartDate = container.Appointment.Start,
                     EndDate = container.Appointment.End,

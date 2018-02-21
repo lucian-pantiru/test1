@@ -17,7 +17,7 @@ namespace dx17test.ViewModels
         public DateTime EndDate { get; set; }
 
         [Required]
-        public string Subject { get; set; }
+        public string Subjject { get; set; }
 
         public int Status { get; set; }
         public string Description { get; set; }
