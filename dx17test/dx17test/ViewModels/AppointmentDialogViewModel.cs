@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dx17test.EFModels;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,6 +30,9 @@ namespace dx17test.ViewModels
         public string RecurrenceInfo { get; set; }
         public string ReminderInfo { get; set; }
         public string RecurrenceXmlInfo { get; set; }
+
+        public IEnumerable Patients { get; set; }
+        public string SelectedPatientsIDs { get; set; }
 
         [Required]
         [Display(Name = "Resource")]

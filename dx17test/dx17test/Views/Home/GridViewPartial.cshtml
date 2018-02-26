@@ -1,0 +1,30 @@
+﻿@model AppointmentDialogViewModel
+@Html.DevExpress().GridView(
+    settings =>
+    {
+        settings.Name = "myGridView";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPart" };
+        settings.Width = 450;
+
+        settings.Columns.Add("Id").SetColVisible(false);
+        settings.Columns.Add("Name");
+        settings.KeyFieldName = "Id";
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
+        settings.ClientSideEvents.SelectionChanged =
+        @"function(s,e){
+            console.log('schimba selectia'); 
+            var keys = myGridView.GetSelectedKeysOnPage();"+
+            "$('input[name=\"SelectedPatientsIDs\"]').val(keys.toString());"+
+        @"
+            console.log('keys='+keys.toString());
+            keys.forEach(function (key, index) {
+                console.log('key '+key+' selected');
+            });
+        }";
+        //settings.Columns.Add("WillAttend", MVCxGridViewColumnType.CheckBox);
+        //settings.Columns.Add("CompanyName");
+        //settings.Columns.Add("City").SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+        //settings.Columns.Add("Region");
+        //settings.Columns.Add("Country");
+    }).Bind(Model.Patients).GetHtml()

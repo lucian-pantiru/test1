@@ -8,6 +8,12 @@ namespace dx17test.EFModels
 
     public partial class DBAppointment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DBAppointment()
+        {
+            Patients = new HashSet<Patient>();
+        }
+
         [Key]
         public int UniqueID { get; set; }
 
@@ -46,5 +52,11 @@ namespace dx17test.EFModels
         public string CustomField1 { get; set; }
 
         public string RecurrenceXmlInfo { get; set; }
+
+        [StringLength(50)]
+        public string SelectedPatientsIDs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }

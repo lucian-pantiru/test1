@@ -8,7 +8,7 @@ namespace dx17test.EFModels
     public partial class DXClinicModels : DbContext
     {
         public DXClinicModels()
-            : base("name=DXClinicModels1")
+            : base("name=DXClinicModels2")
         {
         }
 
@@ -19,6 +19,14 @@ namespace dx17test.EFModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DBAppointment>()
+                .Property(e => e.SelectedPatientsIDs)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<DBAppointment>()
+                .HasMany(e => e.Patients)
+                .WithMany(e => e.DBAppointments)
+                .Map(m => m.ToTable("DBAppointments_Patients").MapLeftKey("DBAppointmentId").MapRightKey("PatientId"));
         }
     }
 }

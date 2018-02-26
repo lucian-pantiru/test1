@@ -1,2 +1,2 @@
-﻿@using dx17test.Helpers
-@Html.DevExpress().Scheduler(Html.GetSchedulerSettings()).Bind(Model.Appointments, Model.Resources).GetHtml()
+﻿@model SchedulerDataObject
+@Html.DevExpress().Scheduler(Html.GetSchedulerSettings(Model)).Bind(Model.Appointments, Model.Resources).GetHtml()

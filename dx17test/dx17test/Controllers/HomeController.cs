@@ -2,6 +2,7 @@ using DevExpress.Web.Mvc;
 using dx17test.EFModels;
 using dx17test.Helpers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,13 @@ namespace dx17test.Controllers
         {
             return PartialView("SchedulerPartial", SchedulerDataHelper.DataObject);
         }
+
+        public ActionResult GridViewPart()
+        {
+            return PartialView("GridViewPartial", SchedulerDataHelper.DataObject);
+        }
+
+
         #endregion
 
         #region editing
@@ -33,21 +41,21 @@ namespace dx17test.Controllers
 
         static void UpdateAppointment()
         {
-            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
+            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in insertedAppts)
             {
                 SchedulerDataHelper.InsertAppointment(appt);
             }
 
-            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
+            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in updatedAppt)
             {
                 SchedulerDataHelper.UpdateAppointment(appt);
             }
 
-            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(),
+            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in removedAppt)
             {

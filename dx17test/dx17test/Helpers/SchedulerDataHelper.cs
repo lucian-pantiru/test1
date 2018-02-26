@@ -1,5 +1,4 @@
 ﻿using dx17test.EFModels;
-using dx17test.OtherModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,11 @@ namespace dx17test.Helpers
             DXClinicModels db = new DXClinicModels();
             return (from apt in db.DBAppointments select apt).ToList();
         }
+        public static System.Collections.IEnumerable GetPatients()
+        {
+            DXClinicModels db = new DXClinicModels();
+            return (from patient in db.Patients select patient).ToList();
+        }
         public static SchedulerDataObject DataObject
         {
             get
@@ -27,7 +31,8 @@ namespace dx17test.Helpers
                 return new SchedulerDataObject()
                 {
                     Appointments = GetAppointments(),
-                    Resources = GetResources()
+                    Resources = GetResources(),
+                    Patients = GetPatients()
                 };
             }
         }

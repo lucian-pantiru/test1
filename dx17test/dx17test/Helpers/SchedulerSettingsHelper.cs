@@ -2,8 +2,10 @@
 using DevExpress.Web.ASPxScheduler;
 using DevExpress.Web.Mvc;
 using DevExpress.XtraScheduler;
+using dx17test.EFModels;
 using dx17test.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,10 +25,10 @@ namespace dx17test.Helpers
         //    }
         //}
 
-        public static SchedulerSettings GetSchedulerSettings()
-        {
-            return GetSchedulerSettings(null);
-        }
+        //public static SchedulerSettings GetSchedulerSettings()
+        //{
+        //    return GetSchedulerSettings(null);
+        //}
 
         public static AppointmentRecurrenceFormSettings CreateAppointmentRecurrenceFormSettings(DevExpress.Web.ASPxScheduler.AppointmentFormTemplateContainer container) {
             return new AppointmentRecurrenceFormSettings()
@@ -48,7 +50,7 @@ namespace dx17test.Helpers
             };
         }
 
-        public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml)
+        public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml, SchedulerDataObject dataObject)
         {
             SchedulerSettings settings = new SchedulerSettings();
             settings.Name = "scheduler";
@@ -84,6 +86,7 @@ namespace dx17test.Helpers
                     Type = (int)container.Appointment.Type,
                     Status = container.Appointment.StatusId,
                     Label = container.Appointment.LabelId,
+                    Patients = dataObject.Patients
                     //CustomInfo = container.CustomInfo,
                     //OwnerId = Convert.ToInt32(container.Appointment.ResourceId)
                 };
