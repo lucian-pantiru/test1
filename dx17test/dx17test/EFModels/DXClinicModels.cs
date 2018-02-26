@@ -8,12 +8,13 @@ namespace dx17test.EFModels
     public partial class DXClinicModels : DbContext
     {
         public DXClinicModels()
-            : base("name=DXClinicModels")
+            : base("name=DXClinicModels1")
         {
         }
 
         public virtual DbSet<DBAppointment> DBAppointments { get; set; }
         public virtual DbSet<DBResource> DBResources { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Practice> Practices { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

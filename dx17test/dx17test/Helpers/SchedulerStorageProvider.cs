@@ -30,7 +30,7 @@ namespace dx17test.Helpers
             appointmentStorage.Mappings.Location = "Location";
             appointmentStorage.Mappings.AllDay = "AllDay";
             appointmentStorage.Mappings.Type = "Type";
-            appointmentStorage.Mappings.RecurrenceInfo = "RecurrenceInfo";
+            appointmentStorage.Mappings.RecurrenceInfo = "RecurrenceXmlInfo";
             appointmentStorage.Mappings.ReminderInfo = "ReminderInfo";
             appointmentStorage.Mappings.Label = "Label";
             appointmentStorage.Mappings.Status = "Status";

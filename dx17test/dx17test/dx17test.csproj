@@ -295,6 +295,7 @@
     <Compile Include="EFModels\DBAppointment.cs" />
     <Compile Include="EFModels\DBResource.cs" />
     <Compile Include="EFModels\DXClinicModels.cs" />
+    <Compile Include="EFModels\Patient.cs" />
     <Compile Include="EFModels\Practice.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

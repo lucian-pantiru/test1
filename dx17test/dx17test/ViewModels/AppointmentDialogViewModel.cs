@@ -27,6 +27,7 @@ namespace dx17test.ViewModels
         public int Type { get; set; }
         public string RecurrenceInfo { get; set; }
         public string ReminderInfo { get; set; }
+        public string RecurrenceXmlInfo { get; set; }
 
         [Required]
         [Display(Name = "Resource")]

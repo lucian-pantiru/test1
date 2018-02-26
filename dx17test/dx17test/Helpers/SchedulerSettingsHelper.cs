@@ -28,6 +28,26 @@ namespace dx17test.Helpers
             return GetSchedulerSettings(null);
         }
 
+        public static AppointmentRecurrenceFormSettings CreateAppointmentRecurrenceFormSettings(DevExpress.Web.ASPxScheduler.AppointmentFormTemplateContainer container) {
+            return new AppointmentRecurrenceFormSettings()
+            {
+                Name = "appointmentRecurrenceForm",
+                Width = System.Web.UI.WebControls.Unit.Percentage(100),
+                IsRecurring = container.Appointment.IsRecurring,
+                DayNumber = container.RecurrenceDayNumber,
+                End = container.RecurrenceEnd,
+                Month = container.RecurrenceMonth,
+                OccurrenceCount = container.RecurrenceOccurrenceCount,
+                Periodicity = container.RecurrencePeriodicity,
+                RecurrenceRange = container.RecurrenceRange,
+                Start = container.Start,
+                WeekDays = container.RecurrenceWeekDays,
+                WeekOfMonth = container.RecurrenceWeekOfMonth,
+                RecurrenceType = container.RecurrenceType,
+                IsFormRecreated = container.IsFormRecreated
+            };
+        }
+
         public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml)
         {
             SchedulerSettings settings = new SchedulerSettings();
@@ -47,6 +67,8 @@ namespace dx17test.Helpers
             settings.ActiveViewType = SchedulerViewType.Day;
 
             settings.AppointmentFormShowing = PrepareAppointmentPopup;
+
+            settings.OptionsForms.RecurrenceFormName = "appointmentRecurrenceForm";
 
             settings.OptionsForms.SetAppointmentFormTemplateContent(c => {
                 var container = (CustomAppointmentTemplateContainer)c;
@@ -73,6 +95,7 @@ namespace dx17test.Helpers
                 customHtml.ViewBag.StatusDataSource = container.StatusDataSource;
                 customHtml.ViewBag.LabelDataSource = container.LabelDataSource;
                 customHtml.ViewBag.ReminderDataSource = container.ReminderDataSource;
+                customHtml.ViewBag.AppointmentRecurrenceFormSettings = CreateAppointmentRecurrenceFormSettings(container);
                 System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(customHtml, "CustomAppointmentFormPartial", modelAppointment);
             });
 

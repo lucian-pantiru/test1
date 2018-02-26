@@ -44,5 +44,7 @@ namespace dx17test.EFModels
 
         [Column(TypeName = "ntext")]
         public string CustomField1 { get; set; }
+
+        public string RecurrenceXmlInfo { get; set; }
     }
 }
