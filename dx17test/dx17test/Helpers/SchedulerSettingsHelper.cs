@@ -50,7 +50,7 @@ namespace dx17test.Helpers
             };
         }
 
-        public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml, SchedulerDataObject dataObject)
+        public static SchedulerSettings GetSchedulerSettings(this System.Web.Mvc.HtmlHelper customHtml, IEnumerable<DBAppointment> appts, IEnumerable<DBResource> resources, IEnumerable<Patient> patients)
         {
             SchedulerSettings settings = new SchedulerSettings();
             settings.Name = "scheduler";
@@ -86,9 +86,12 @@ namespace dx17test.Helpers
                     Type = (int)container.Appointment.Type,
                     Status = container.Appointment.StatusId,
                     Label = container.Appointment.LabelId,
-                    Patients = dataObject.Patients
-                    //CustomInfo = container.CustomInfo,
+                    Patients = patients,
+                    Resources = resources,
+                    Appointments = appts
                     //OwnerId = Convert.ToInt32(container.Appointment.ResourceId)
+                    //RecurrenceInfo = container.Appointment.RecurrenceInfo.ToXml(),
+                    //RecurrenceXmlInfo = container.Appointment.RecurrenceInfo.ToXml()
                 };
 
                 customHtml.ViewBag.DeleteButtonEnabled = container.CanDeleteAppointment;

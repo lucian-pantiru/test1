@@ -1,10 +1,12 @@
 using DevExpress.Web.Mvc;
 using dx17test.EFModels;
 using dx17test.Helpers;
+using dx17test.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,17 +17,29 @@ namespace dx17test.Controllers
         #region reading
         public ActionResult Index()
         {
-            return View(SchedulerDataHelper.DataObject);
+            AppointmentDialogViewModel vm = new AppointmentDialogViewModel();
+            vm.Appointments = SchedulerDataHelper.GetAppointments();
+            vm.Resources = SchedulerDataHelper.GetResources();
+            vm.Patients = SchedulerDataHelper.GetPatients();
+            return View(vm);
         }
 
         public ActionResult SchedulerPartial()
         {
-            return PartialView("SchedulerPartial", SchedulerDataHelper.DataObject);
+            AppointmentDialogViewModel vm = new AppointmentDialogViewModel();
+            vm.Appointments = SchedulerDataHelper.GetAppointments();
+            vm.Resources = SchedulerDataHelper.GetResources();
+            vm.Patients = SchedulerDataHelper.GetPatients();
+            return PartialView("SchedulerPartial", vm);
         }
 
         public ActionResult GridViewPart()
         {
-            return PartialView("GridViewPartial", SchedulerDataHelper.DataObject);
+            AppointmentDialogViewModel vm = new AppointmentDialogViewModel();
+            vm.Appointments = SchedulerDataHelper.GetAppointments();
+            vm.Resources = SchedulerDataHelper.GetResources();
+            vm.Patients = SchedulerDataHelper.GetPatients();
+            return PartialView("GridViewPartial", vm);
         }
 
 
@@ -36,26 +50,30 @@ namespace dx17test.Controllers
         public ActionResult EditAppointment()
         {
             UpdateAppointment();
-            return PartialView("SchedulerPartial", SchedulerDataHelper.DataObject);
+            AppointmentDialogViewModel vm = new AppointmentDialogViewModel();
+            vm.Appointments = SchedulerDataHelper.GetAppointments();
+            vm.Resources = SchedulerDataHelper.GetResources();
+            vm.Patients = SchedulerDataHelper.GetPatients();
+            return PartialView("SchedulerPartial", vm);
         }
 
         static void UpdateAppointment()
         {
-            DBAppointment[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
+            AppointmentDialogViewModel[] insertedAppts = SchedulerExtension.GetAppointmentsToInsert<AppointmentDialogViewModel>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources(), SchedulerDataHelper.GetPatients()),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in insertedAppts)
             {
                 SchedulerDataHelper.InsertAppointment(appt);
             }
 
-            DBAppointment[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
+            AppointmentDialogViewModel[] updatedAppt = SchedulerExtension.GetAppointmentsToUpdate<AppointmentDialogViewModel>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources(), SchedulerDataHelper.GetPatients()),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in updatedAppt)
             {
                 SchedulerDataHelper.UpdateAppointment(appt);
             }
 
-            DBAppointment[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<DBAppointment>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.DataObject),
+            AppointmentDialogViewModel[] removedAppt = SchedulerExtension.GetAppointmentsToRemove<AppointmentDialogViewModel>(SchedulerSettingsHelper.GetSchedulerSettings(null, SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources(), SchedulerDataHelper.GetPatients()),
                 SchedulerDataHelper.GetAppointments(), SchedulerDataHelper.GetResources());
             foreach (var appt in removedAppt)
             {

@@ -31,7 +31,9 @@ namespace dx17test.ViewModels
         public string ReminderInfo { get; set; }
         public string RecurrenceXmlInfo { get; set; }
 
-        public IEnumerable Patients { get; set; }
+        public IEnumerable<Patient> Patients { get; set; }
+        public IEnumerable<DBAppointment> Appointments { get; set; }
+        public IEnumerable<DBResource> Resources { get; set; }
         public string SelectedPatientsIDs { get; set; }
 
         [Required]

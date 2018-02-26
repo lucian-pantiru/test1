@@ -19,9 +19,9 @@ namespace dx17test.EFModels
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DBAppointment>()
-                .Property(e => e.SelectedPatientsIDs)
-                .IsUnicode(false);
+            //modelBuilder.Entity<DBAppointment>()
+            //    .Property(e => e.SelectedPatientsIDs)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<DBAppointment>()
                 .HasMany(e => e.Patients)

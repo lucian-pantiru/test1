@@ -1,2 +1,2 @@
-﻿@model SchedulerDataObject
-@Html.DevExpress().Scheduler(Html.GetSchedulerSettings(Model)).Bind(Model.Appointments, Model.Resources).GetHtml()
+﻿@model AppointmentDialogViewModel
+@Html.DevExpress().Scheduler(Html.GetSchedulerSettings(Model.Appointments, Model.Resources, Model.Patients)).Bind(Model.Appointments, Model.Resources).GetHtml()
